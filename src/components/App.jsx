@@ -24,7 +24,7 @@ export const App = () => {
     if (location.pathname === '/') {
       navigate('/login', { replace: true });
     }
-  }, []);
+  }, [location.pathname, navigate]);
 
   return (
     !isFetchingCurrentUser && (
