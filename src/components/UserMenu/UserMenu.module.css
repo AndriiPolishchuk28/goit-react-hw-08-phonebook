@@ -1,0 +1,23 @@
+.user_wrap {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user_name {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.btn {
+  background-color: #1677ff;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  height: 25px;
+  width: 65px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}

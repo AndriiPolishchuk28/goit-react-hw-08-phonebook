@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = 'https://65b5763341db5efd2867b860.mockapi.io';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
 const fetchContacts = async () => {
   const response = await axios.get('/contacts');

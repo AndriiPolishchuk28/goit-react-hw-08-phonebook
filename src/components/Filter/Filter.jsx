@@ -1,6 +1,7 @@
-import { setFilter } from '../../redux/contactsSlice';
+import { setFilter } from '../../redux/contacts/contactsSlice';
 import { useDispatch } from 'react-redux';
 import css from './Filter.module.css';
+import { Input } from 'antd';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -9,8 +10,8 @@ export const Filter = () => {
   };
   return (
     <>
-      <p>Find contacts by name</p>
-      <input className={css.input} type="text" onChange={handleOnChange} />
+      <h3 className={css.title}>Find contacts by name</h3>
+      <Input onChange={handleOnChange} />
     </>
   );
 };

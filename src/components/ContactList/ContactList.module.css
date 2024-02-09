@@ -6,6 +6,8 @@
 
 .list_item {
   display: flex;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 .btn {
@@ -14,8 +16,5 @@
 }
 
 .list {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding-left: 0;
 }

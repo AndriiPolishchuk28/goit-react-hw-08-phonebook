@@ -1,10 +1,11 @@
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import css from './ContactForm.module.css';
+import { Input, Button } from 'antd';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContactThunk } from '../../redux/operations';
-import { selectContacts } from '../../redux/selectors';
+import { addContactThunk } from '../../redux/contacts/operations';
+import { selectContacts } from '../../redux/contacts/selectors';
 
 const initialValues = {
   name: '',
@@ -48,31 +49,21 @@ export const ContactForm = () => {
       onSubmit={handleSubmit}
       validationSchema={schema}
     >
-      <Form className={css.form}>
-        <label className={css.label_text} htmlFor="name">
-          Name
-        </label>
-        <Field
-          className={css.input}
-          id="name"
-          type="text"
-          name="name"
-          required
-        />
-        <label className={css.label_text} htmlFor="number">
-          Number
-        </label>
-        <Field
-          className={css.input}
-          id="number"
-          type="tel"
-          name="number"
-          required
-        />
-        <button className={css.btn} type="submit">
-          Add contact
-        </button>
-      </Form>
+      <div className={css.wrapper}>
+        <Form className={css.form}>
+          <label className={css.label_text} htmlFor="name">
+            Name
+          </label>
+          <Field as={Input} id="name" type="text" name="name" required />
+          <label className={css.label_text} htmlFor="number">
+            Number
+          </label>
+          <Field as={Input} id="number" type="tel" name="number" required />
+          <Button className={css.btn} type="primary" htmlType="submit">
+            Add contact
+          </Button>
+        </Form>
+      </div>
     </Formik>
   );
 };
