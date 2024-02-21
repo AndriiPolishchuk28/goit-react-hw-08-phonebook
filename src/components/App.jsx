@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Login } from 'pages/Login/Login';
 import { Register } from 'pages/Register/Register';
 import { Layout } from './Layout/Layout';
@@ -13,23 +13,31 @@ import { selectFetchingCurrentUser } from '../redux/auth/selectors';
 export const App = () => {
   const dispatch = useDispatch();
   const isFetchingCurrentUser = useSelector(selectFetchingCurrentUser);
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchCurrent());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      navigate('/login', { replace: true });
-    }
-  }, [location.pathname, navigate]);
+  // useEffect(() => {
+  //   if (location.pathname === '/') {
+  //     navigate('/login', { replace: true });
+  //   }
+  // }, [location.pathname, navigate]);
 
   return (
     !isFetchingCurrentUser && (
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
           <Route
             exact
             path="login"

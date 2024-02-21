@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
-import { addContactThunk, getContacts, deleteContactThunk } from './operations';
+import {
+  addContactThunk,
+  getContacts,
+  deleteContactThunk,
+  editContactThunk,
+} from './operations';
 
 const handlePending = ({ contacts }) => {
   contacts.error = null;
@@ -39,7 +44,14 @@ const contactsSlice = createSlice({
         contacts.items = contacts.items.filter(item => item.id !== payload.id);
         contacts.isLoading = false;
       })
-      .addCase(deleteContactThunk.rejected, handleRejected),
+      .addCase(deleteContactThunk.rejected, handleRejected)
+      .addCase(editContactThunk.fulfilled, ({ contacts }, { payload }) => {
+        const { id } = payload;
+        console.log(contacts);
+        contacts.items = contacts.items.map(contact =>
+          contact.id === id ? payload : contact
+        );
+      }),
 });
 
 export const { addContact, removeContact, setFilter } = contactsSlice.actions;

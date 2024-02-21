@@ -1,16 +1,13 @@
 import { useEffect } from 'react';
 import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getContacts,
-  deleteContactThunk,
-} from '../../redux/contacts/operations';
+import { getContacts } from '../../redux/contacts/operations';
 import {
   selectFilteredItems,
   selectIsLoading,
 } from '../../redux/contacts/selectors';
 import { Loader } from 'components/Loader/Loader';
-import { Button } from 'antd';
+import { ContactItem } from './ContactItem';
 
 export const ContactList = () => {
   const filteredContacts = useSelector(selectFilteredItems);
@@ -26,20 +23,7 @@ export const ContactList = () => {
     <>
       <ul className={css.list}>
         {filteredContacts?.map(({ name, id, number }) => {
-          return (
-            <li className={css.list_item} key={id}>
-              <span className={css.name_text}>{name} </span>
-              <span>{number}</span>
-              <Button
-                className={css.btn}
-                onClick={() => dispatch(deleteContactThunk(id))}
-                type="primary"
-                danger
-              >
-                Delete
-              </Button>
-            </li>
-          );
+          return <ContactItem key={id} name={name} id={id} number={number} />;
         })}
         {isLoading && <Loader />}
       </ul>

@@ -19,6 +19,11 @@ const deleteContact = async id => {
   return response.data;
 };
 
+const editContact = async contact => {
+  const response = await axios.patch(`/contacts/${contact.id}`, contact.values);
+  return response.data;
+};
+
 export const getContacts = createAsyncThunk(
   'contacts/fetch',
   async (_, thunkApi) => {
@@ -48,6 +53,18 @@ export const deleteContactThunk = createAsyncThunk(
   async (id, thunkApi) => {
     try {
       return await deleteContact(id);
+    } catch (error) {
+      toast.error(error.message);
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editContactThunk = createAsyncThunk(
+  'contacts/edit',
+  async (contact, thunkApi) => {
+    try {
+      return await editContact(contact);
     } catch (error) {
       toast.error(error.message);
       return thunkApi.rejectWithValue(error.message);
